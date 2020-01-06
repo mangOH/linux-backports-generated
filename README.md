@@ -6,7 +6,7 @@ document attempts to describe the steps performed to reach re-create this conten
 1. Create a directory to work in: `mkdir -p ~/mangOH_backports`
 1. `cd ~/mangOH_backports`
 1. Get a local copy of the mangOH backports repository:
-   `git clone https://github.com/mangOH/linux-backports-generated.git`
+   `git clone --branch swi_4.14.y https://github.com/mangOH/linux-backports.git`
 1. Get a local copy of the stable Linux kernel tree:
    `git clone git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git`
 1. Download the [zip file of the 2019-10-31 release of the Cypress FMAC driver](
@@ -23,7 +23,7 @@ document attempts to describe the steps performed to reach re-create this conten
 1. Ensure that you have an up to date version of [coccinelle](
    https://github.com/coccinelle/coccinelle) installed. Version 1.0.8 is known to work.
 1. Run this command to generatee the backports tree:
-   `./gentree.py --clean --git-debug --verbose --git-revision cypress_fmac_v4.14.77_20191031 ~/mangOH_backports/linux ~/mangOH_backports/generated`
+   `./gentree.py --clean --verbose --git-revision cypress_fmac_v4.14.77_20191031 ~/mangOH_backports/linux ~/mangOH_backports/generated`
 
 At this point `~/mangOH_backports/generated` should contain a directory that is consistent with the
 content of this git repository.  If you wish to manually perform a build, do the following.
