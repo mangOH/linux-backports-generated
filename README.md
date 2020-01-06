@@ -27,9 +27,10 @@ document attempts to describe the steps performed to reach re-create this conten
 
 At this point `~/mangOH_backports/generated` should contain a directory that is consistent with the
 content of this git repository.  If you wish to manually perform a build, do the following.
-1. `cd ~/mangOH_backports/generated`
-1. Setup your toolchain using leaf
+1. Copy the generated backports folder inside of your leaf worksapce:
+   `cp -r ~/mangOH/generated /path/to/your/leaf/workspace/`
+1. Setup your leaf environment: `cd /path/to/your/leaf/workspace/generated && leaf shell`
 1. Set the backports config:
-   `ARCH=arm CROSS_COMPILE=arm-poky-linux-gnueabi- KLIB=``findtoolchain wp77xx kernelroot`` KLIB_BUILD=``findtoolchain wp77xx kernelroot`` PATH=``findtoolchain wp77xx dir``:$PATH make defconfig-mangoh-yellow`
+   ``ARCH=arm CROSS_COMPILE=arm-poky-linux-gnueabi- KLIB=`findtoolchain wp77xx kernelroot` KLIB_BUILD=`findtoolchain wp77xx kernelroot` PATH=`findtoolchain wp77xx dir`:$PATH make defconfig-mangoh-yellow``
 1. Build the backported modules:
-   `ARCH=arm CROSS_COMPILE=arm-poky-linux-gnueabi- KLIB=``findtoolchain wp77xx kernelroot`` KLIB_BUILD=``findtoolchain wp77xx kernelroot`` PATH=``findtoolchain wp77xx dir``:$PATH make`
+   ``ARCH=arm CROSS_COMPILE=arm-poky-linux-gnueabi- KLIB=`findtoolchain wp77xx kernelroot` KLIB_BUILD=`findtoolchain wp77xx kernelroot` PATH=`findtoolchain wp77xx dir`:$PATH make``
