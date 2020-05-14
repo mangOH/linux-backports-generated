@@ -852,7 +852,11 @@ static int bcm_probe(struct platform_device *pdev)
 
 	dev->pdev = pdev;
 
+#if LINUX_VERSION_IS_LESS(4,1,0)
+	if (ACPI_COMPANION(&pdev->dev))
+#else
 	if (has_acpi_companion(&pdev->dev))
+#endif
 		ret = bcm_acpi_probe(dev);
 	else
 		ret = bcm_platform_probe(dev);
