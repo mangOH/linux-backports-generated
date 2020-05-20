@@ -173,8 +173,8 @@ static int bcm_gpio_set_power(struct bcm_device *dev, bool powered)
 		clk_prepare_enable(dev->clk);
 
 #if LINUX_VERSION_IS_GEQ(3,13,0)
-	gpiod_set_value(dev->shutdown, powered);
-	gpiod_set_value(dev->device_wakeup, powered);
+	gpiod_set_value_cansleep(dev->shutdown, powered);
+	gpiod_set_value_cansleep(dev->device_wakeup, powered);
 #endif
 
 	if (!powered && !IS_ERR(dev->clk) && dev->clk_enabled)
@@ -576,7 +576,7 @@ static int bcm_suspend_device(struct device *dev)
 	/* Suspend the device */
 	if (bdev->device_wakeup) {
 #if LINUX_VERSION_IS_GEQ(3,13,0)
-		gpiod_set_value(bdev->device_wakeup, false);
+		gpiod_set_value_cansleep(bdev->device_wakeup, false);
 #endif
 		bt_dev_dbg(bdev, "suspend, delaying 15 ms");
 		mdelay(15);
@@ -593,7 +593,7 @@ static int bcm_resume_device(struct device *dev)
 
 	if (bdev->device_wakeup) {
 #if LINUX_VERSION_IS_GEQ(3,13,0)
-		gpiod_set_value(bdev->device_wakeup, true);
+		gpiod_set_value_cansleep(bdev->device_wakeup, true);
 #endif
 		bt_dev_dbg(bdev, "resume, delaying 15 ms");
 		mdelay(15);
